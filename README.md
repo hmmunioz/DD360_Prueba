@@ -34,6 +34,10 @@ THE TESTS MUST BE RUN ONE BY ONE AND NOT IN GROUP
 ## dd360 Features:
 
 - Superhero
+- Comics
+- Event
+- Series
+- Stories
 
 ### Libraries & Tools Used
 
