@@ -23,4 +23,21 @@ extension MarvelEnumExtension on MarvelEnum {
         return '';
     }
   }
+
+  String get plural {
+    switch (this) {
+      case MarvelEnum.superhero:
+        return 'SuperHeros';
+      case MarvelEnum.comic:
+        return 'Comics';
+      case MarvelEnum.serie:
+        return 'Series';
+      case MarvelEnum.story:
+        return 'Stories';
+      case MarvelEnum.event:
+        return 'Events';
+      default:
+        return '';
+    }
+  }
 }

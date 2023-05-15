@@ -4,6 +4,7 @@ import 'package:dd360_test/app/common_widgets/app_bar.dart';
 import 'package:dd360_test/app/common_widgets/card_skeleton.dart';
 import 'package:dd360_test/app/common_widgets/list_view_infinite.dart';
 import 'package:dd360_test/app/common_widgets/no_result_widget.dart';
+import 'package:dd360_test/app/common_widgets/skeleton_list.dart';
 import 'package:dd360_test/app/models/marvel_models/comic_model.dart';
 import 'package:dd360_test/app/models/marvel_models/superhero_model.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -83,7 +84,7 @@ class _Content extends StatelessWidget {
                   );
                 } else if (state is bloc.InitialState ||
                     state is bloc.LoadingComicsState) {
-                  return const _CardSkeletonList();
+                  return const CardSkeletonList();
                 } else {
                   return SizedBox(
                     height: size.height * .86,
@@ -135,20 +136,4 @@ class _Content extends StatelessWidget {
       ),
     );
   }
-}
-
-class _CardSkeletonList extends StatelessWidget {
-  const _CardSkeletonList({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) => ListView.separated(
-        itemCount: 10,
-        shrinkWrap: true,
-        padding: const EdgeInsets.symmetric(
-          vertical: 25,
-          horizontal: 16,
-        ),
-        separatorBuilder: (_, __) => const SizedBox(height: 15.0),
-        itemBuilder: (_, __) => const CardSkeleton(),
-      );
 }

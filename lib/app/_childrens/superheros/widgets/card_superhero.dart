@@ -96,25 +96,25 @@ class CardSuperHero extends StatelessWidget {
                 left: size.width * .17,
                 child: ChipOptionsMarvel(marvelEnumList: [
                   {
-                    'enum': MarvelEnum.comic.value,
+                    'enum': MarvelEnum.comic.plural,
                     'action': () {
                       gotoPage(context, '/comics', const ComicsPage());
                     }
                   },
                   {
-                    'enum': MarvelEnum.event.value,
+                    'enum': MarvelEnum.event.plural,
                     'action': () {
                       gotoPage(context, '/events', const EventMarvelPage());
                     }
                   },
                   {
-                    'enum': MarvelEnum.serie.value,
+                    'enum': MarvelEnum.serie.plural,
                     'action': () {
                       gotoPage(context, '/series', const SeriesPage());
                     }
                   },
                   {
-                    'enum': MarvelEnum.story.value,
+                    'enum': MarvelEnum.story.plural,
                     'action': () {
                       gotoPage(context, '/stories', const StoryPage());
                     }
