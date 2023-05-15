@@ -15,6 +15,10 @@ git@github.com:hmmunioz/DD360_Prueba.git
 **Step 2:**
 Add the .env to the root of the project before to run (I send the .env file to the e-mail diana.rubio@dacodes.com)
 
+-Fonly for ios:
+
+1.  Change iOS Deployment Target in FMDB to iOS 11.0
+
 Go to project root and execute the following command in console to get the required dependencies:
 
 ```
@@ -26,10 +30,6 @@ flutter pub get
 Run:
 flutter run
 ```
-
-## -----IMPORTANT-----
-
-THE TESTS MUST BE RUN ONE BY ONE AND NOT IN GROUP
 
 ## dd360 Features:
 
