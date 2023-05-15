@@ -15,8 +15,8 @@ git@github.com:hmmunioz/DD360_Prueba.git
 **Step 2:**
 Add the .env to the root of the project before to run (I send the .env file to the e-mail diana.rubio@dacodes.com)
 The .env filte containes 2 keys
-PUBLIC_KEY=Valor de la key
-PRIVATE_KEY=Valor de la key
+PUBLIC_KEY=value
+PRIVATE_KEY=value
 
 -Fonly for ios:
 
