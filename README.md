@@ -79,6 +79,6 @@ lib/
 ```
 
 ![alt text](https://i.postimg.cc/G4YQdLJq/Captura-de-pantalla-2023-05-15-a-la-s-02-14-48.png)
-![alt text](https://i.postimg.cc/jLBXpwND/Captura-de-pantalla-2023-05-15-a-la-s-02-14-57.png)
+
 ![alt text](https://i.postimg.cc/gwWK0Cgd/Captura-de-pantalla-2023-05-15-a-la-s-02-15-11.png)
 ![alt text](https://i.postimg.cc/bsZgVHGX/Captura-de-pantalla-2023-05-15-a-la-s-02-15-21.png)
