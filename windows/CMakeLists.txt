@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
-project(dd360_test LANGUAGES CXX)
+project(dacodes_test LANGUAGES CXX)
 
-set(BINARY_NAME "dd360_test")
+set(BINARY_NAME "dacodes_test")
 
 cmake_policy(SET CMP0063 NEW)
 

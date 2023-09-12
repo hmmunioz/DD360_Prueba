@@ -1,6 +1,6 @@
-# dd360 Test
+# DaCodes Test
 
-This is a test application for the company DD360, which consists of loading a list of apis that have Marvel information such as Superheroes, Comics, Events, Series and Stories
+This is a test application for the company DaCodes, which consists of loading a list of apis that have Marvel information such as Superheroes, Comics, Events, Series and Stories
 
 ## How to Use
 
@@ -9,7 +9,7 @@ This is a test application for the company DD360, which consists of loading a li
 Download or clone this repo by using the link below:
 
 ```
-git@github.com:hmmunioz/DD360_Prueba.git
+git@github.com:hmmunioz/DaCodes_Prueba.git
 ```
 
 **Step 2:**
@@ -31,7 +31,7 @@ Run:
 flutter run
 ```
 
-## dd360 Features:
+## DaCodes Features:
 
 - Superhero
 - Comics
@@ -54,7 +54,7 @@ flutter run
 Here is the core folder structure which flutter provides.
 
 ```
-DD360_TEST/
+DaCodes_TEST/
 |- android
 |- build
 |- ios

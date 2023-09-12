@@ -1,4 +1,4 @@
-name: dd360_test
+name: dacodes_test
 description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
@@ -29,17 +29,19 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
   equatable: ^2.0.5
   shimmer: ^2.0.0
   flutter_bloc: ^8.1.2
   http: ^0.13.5
   cached_network_image: ^3.1.0
   flutter_dotenv: ^5.0.2
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
+  flutter_translate: ^4.0.3
+  google_fonts: ^4.0.3
+  carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
-
+  animate_do: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -63,11 +65,12 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/i18n/
     - .env
   fonts:
-      - family: MarvelRegular
-        fonts:
-          - asset: assets/fonts/Marvel-Regular.ttf
+    - family: MarvelRegular
+      fonts:
+        - asset: assets/fonts/Marvel-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

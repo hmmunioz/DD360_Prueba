@@ -1,25 +1,66 @@
-import 'package:dd360_test/app/enums/marvel/superhero_filter_enum.dart';
+import 'package:dacodes_test/app/models/serie_models/episode_model.dart';
+import 'package:dacodes_test/app/models/serie_models/season_model.dart';
+import 'package:dacodes_test/app/models/serie_models/serie_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:dd360_test/app/models/result_models/result_marvel_list_model.dart';
-import 'package:dd360_test/app/utils/helper.dart';
+import 'package:dacodes_test/app/utils/helper.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:convert';
 
-class Repository {
-  Future<ResultMarvelListModel?> getEntityMarvelApi(
-    String uri,
-    MarvelEnum marvelEnum, {
-    int page = 0,
-    int size = 10,
-  }) async {
-    final finalUri = uri + "?offset=$page&limit=$size&";
-    final response = await http.get(Uri.parse(addHashKeys(uri: finalUri)),
-        headers: await getHeaders());
+import '../constants/apiurl.dart';
 
+class Repository {
+  Future<SerieModel?> getSeriesApi({String? search}) async {
+    final searchTemp =
+        search == '' || search == null ? 'Game of Thrones' : search;
+    final url = ApiUrlValues.apiBaseUrl +
+        (dotenv.env['API_KEY'] ?? '') +
+        "&t=$searchTemp";
+    final response =
+        await http.get(Uri.parse(url), headers: await getHeaders());
     if (response.statusCode == 200) {
       var decodedBody = decodedUtf8(response.body);
       var jsonBody = json.decode(decodedBody);
 
-      return ResultMarvelListModel.fromJson(jsonBody, marvelEnum);
+      return SerieModel.fromJson(jsonBody);
+    } else {
+      return null;
+    }
+  }
+
+  Future<SeasonModel?> getSeasonApi({
+    required String search,
+    required int season,
+  }) async {
+    final url = ApiUrlValues.apiBaseUrl +
+        (dotenv.env['API_KEY'] ?? '') +
+        "&t=$search&season=$season";
+    final response =
+        await http.get(Uri.parse(url), headers: await getHeaders());
+    if (response.statusCode == 200) {
+      var decodedBody = decodedUtf8(response.body);
+      var jsonBody = json.decode(decodedBody);
+
+      return SeasonModel.fromJson(jsonBody);
+    } else {
+      return null;
+    }
+  }
+
+  Future<EpisodeModel?> getEpisodeApi({
+    required String search,
+    required int season,
+    required int episode,
+  }) async {
+    final url = ApiUrlValues.apiBaseUrl +
+        (dotenv.env['API_KEY'] ?? '') +
+        "&t=$search&Season=$season&Episode=$episode";
+    final response =
+        await http.get(Uri.parse(url), headers: await getHeaders());
+    if (response.statusCode == 200) {
+      var decodedBody = decodedUtf8(response.body);
+      var jsonBody = json.decode(decodedBody);
+
+      return EpisodeModel.fromJson(jsonBody);
     } else {
       return null;
     }

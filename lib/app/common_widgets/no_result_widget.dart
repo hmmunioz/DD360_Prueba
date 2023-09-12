@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:dd360_test/app/common_widgets/btn_widget.dart';
-import 'package:dd360_test/app/constants/assets.dart';
-import 'package:dd360_test/app/constants/texts.dart';
+import 'package:dacodes_test/app/common_widgets/btn_widget.dart';
+import 'package:dacodes_test/app/constants/assets.dart';
+import 'package:dacodes_test/app/constants/texts.dart';
 
 class NoResultWidget extends StatelessWidget {
   const NoResultWidget({

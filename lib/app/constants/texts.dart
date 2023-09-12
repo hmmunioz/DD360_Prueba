@@ -1,7 +1,7 @@
 class TextUIValues {
   TextUIValues._();
 
-  static const String dd360Test = 'dd360 Test';
+  static const String dacodesTest = 'DaCodes Test';
   static const String comics = 'Comics';
   static const String events = 'Events';
   static const String series = 'Series';
@@ -14,6 +14,6 @@ class TextUIValues {
   static const String page = 'Page';
   static const String nameUser = 'Mauricio Muñoz';
   static const String loadingPoints = 'Loading...';
-  static const String wellcome = 'Wellcome to DD360 Test';
+  static const String wellcome = 'Wellcome to DaCodes Test';
   static const String enter = 'Enter';
 }

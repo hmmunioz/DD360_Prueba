@@ -1,4 +1,4 @@
-package com.example.dd360_test;
+package com.example.dacodes_test;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,12 +10,9 @@ import io.flutter.Log;
 import io.flutter.embedding.android.FlutterActivity;
 import io.flutter.embedding.engine.FlutterEngine;
 
-
 import org.json.JSONObject;
 
 public class MainActivity extends FlutterActivity {
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +23,13 @@ public class MainActivity extends FlutterActivity {
     @Override
     public void configureFlutterEngine(FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
-     
 
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-    
+
     }
 
     @Override
@@ -45,7 +41,7 @@ public class MainActivity extends FlutterActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-   
+
     }
 
 }

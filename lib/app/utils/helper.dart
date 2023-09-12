@@ -1,7 +1,7 @@
 import 'dart:convert' show utf8;
 import 'dart:convert';
-import 'package:crypto/crypto.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 Future<Map<String, String>> getHeaders() async {
   Map<String, String> headers = {
@@ -19,23 +19,21 @@ String decodedUtf8(String text) {
   }
 }
 
-String addHashKeys({String uri = ""}) {
-  String timeStamp = DateTime.now().millisecondsSinceEpoch.toString();
-  return uri +
-      "apikey=${dotenv.env['PUBLIC_KEY'] ?? ''}&hash=${generateMD5Hash(
-        timeStamp,
-        dotenv.env['PRIVATE_KEY'] ?? '',
-        dotenv.env['PUBLIC_KEY'] ?? '',
-      )}&ts=$timeStamp";
+Future changeLocale(BuildContext context, String? localeCode) async {
+  if (localeCode != null) {
+    await LocalizedApp.of(context)
+        .delegate
+        .changeLocale(localeFromString(localeCode));
+
+    LocalizationProvider.of(context).state.onLocaleChanged();
+  }
 }
 
-String generateMD5Hash(
-  String timeStamp,
-  String privateKey,
-  String publicKey,
-) {
-  String concatenatedString = timeStamp + privateKey + publicKey;
-  var bytes = utf8.encode(concatenatedString);
-  var md5Hash = md5.convert(bytes);
-  return md5Hash.toString();
+gotoPage(BuildContext context, Widget widget) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => widget,
+    ),
+  );
 }
