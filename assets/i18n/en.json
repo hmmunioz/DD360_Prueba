@@ -18,5 +18,9 @@
     "actors":"Actors",
     "language":"Language",
     "seasons":"Seasons",
-    "season":"Season"
+    "season":"Season",
+    "episodes":"Episodes",
+    "episode":"Episode",
+    "view":"View",
+    "title":"Title"
   }

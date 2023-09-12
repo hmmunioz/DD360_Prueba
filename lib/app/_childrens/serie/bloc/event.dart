@@ -14,6 +14,22 @@ class GetSeriesEvent extends Event {
   );
 }
 
-class GetSeasonEvent extends Event {}
+class GetSeasonEvent extends Event {
+  final String search;
+  final int season;
+  const GetSeasonEvent(
+    this.search,
+    this.season,
+  );
+}
 
-class GetEpisodeEvent extends Event {}
+class GetEpisodeEvent extends Event {
+  final String search;
+  final int episode;
+  final int season;
+  const GetEpisodeEvent(
+    this.search,
+    this.episode,
+    this.season,
+  );
+}

@@ -1,20 +1,38 @@
 import 'package:dacodes_test/app/common_widgets/btn_back_widget.dart';
-import 'package:dacodes_test/app/common_widgets/card_slider.dart';
+import 'package:dacodes_test/app/models/episode_model.dart';
+import 'package:dacodes_test/app/models/season_model.dart';
 import 'package:dacodes_test/app/models/serie_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:dacodes_test/app/_childrens/serie/bloc/bloc.dart' as bloc;
 
-class SerieDetailPage extends StatelessWidget {
-  const SerieDetailPage({
+import '../../../common_widgets/btn_back_widget.dart';
+
+class EpisodeDetailPage extends StatelessWidget {
+  const EpisodeDetailPage({
     Key? key,
     required this.serie,
+    required this.season,
+    required this.episode,
   }) : super(key: key);
   final SerieModel serie;
+  final String season;
+  final Episode episode;
   @override
   Widget build(BuildContext context) {
-    return _Content(
-      serie: serie,
+    return BlocProvider(
+      create: (_) => bloc.Bloc()
+        ..add(bloc.GetEpisodeEvent(
+          serie.title,
+          int.parse(episode.episode),
+          int.parse(season),
+        )),
+      child: _Content(
+        serie: serie,
+        episodeCard: episode,
+      ),
     );
   }
 }
@@ -23,8 +41,10 @@ class _Content extends StatelessWidget {
   const _Content({
     Key? key,
     required this.serie,
+    required this.episodeCard,
   }) : super(key: key);
   final SerieModel serie;
+  final Episode episodeCard;
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -61,78 +81,51 @@ class _Content extends StatelessWidget {
                   flexibleSpace: const SizedBox.shrink(),
                 ),
                 SliverToBoxAdapter(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: size.height * 0.5,
-                        margin: const EdgeInsets.symmetric(
-                          vertical: 16,
-                          horizontal: 24,
-                        ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.3),
-                              spreadRadius: 1,
-                              blurRadius: 10,
-                              offset: const Offset(0, 3),
+                  child: BlocBuilder<bloc.Bloc, bloc.State>(
+                    builder: (context, state) {
+                      final resultEpisodeModel = state.model.episode;
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                SizedBox(height: size.height * 0.035),
+                                _TitleRow(
+                                  episode: state.model.episode,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _OverviewRow(
+                                  episode: state.model.episode,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _ReleaseDateLanguageRow(
+                                  episode: resultEpisodeModel,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _RatingRow(
+                                  episode: resultEpisodeModel,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _GenreRow(
+                                  episode: resultEpisodeModel,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _OriginCountryRow(
+                                  episode: resultEpisodeModel,
+                                ),
+                                SizedBox(height: size.height * 0.035),
+                                _ActorsRow(
+                                  episode: resultEpisodeModel,
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(16),
-                          child: Image.network(
-                            serie.poster,
-                            fit: BoxFit.cover,
                           ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            SizedBox(height: size.height * 0.035),
-                            _OverviewRow(
-                              serie: serie,
-                            ),
-                            SizedBox(height: size.height * 0.035),
-                            _ReleaseDateLanguageRow(
-                              serie: serie,
-                            ),
-                            SizedBox(height: size.height * 0.035),
-                            if (serie.ratings.isNotEmpty)
-                              _RatingRow(
-                                serie: serie,
-                              ),
-                            if (serie.ratings.isNotEmpty)
-                              SizedBox(height: size.height * 0.035),
-                            _GenreRow(
-                              serie: serie,
-                            ),
-                            SizedBox(height: size.height * 0.035),
-                            _OriginCountryRow(
-                              serie: serie,
-                            ),
-                            SizedBox(height: size.height * 0.035),
-                            _ActorsRow(
-                              serie: serie,
-                            ),
-                            SizedBox(
-                              height: size.height * 0.035,
-                            ),
-                            _SeasonsRow(
-                              serie: serie,
-                            ),
-                            SizedBox(
-                              height: size.height * 0.035,
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
+                        ],
+                      );
+                    },
                   ),
                 ),
               ],
@@ -144,12 +137,56 @@ class _Content extends StatelessWidget {
   }
 }
 
+class _TitleRow extends StatelessWidget {
+  const _TitleRow({
+    Key? key,
+    required this.episode,
+  }) : super(key: key);
+  final EpisodeModel? episode;
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          episode?.title ?? '',
+          style: GoogleFonts.openSans(
+            fontSize: 26,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColorLight,
+          ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "${translate('episode')}: ${episode?.episode ?? ''}",
+              style: GoogleFonts.marvel(
+                fontSize: 18,
+                color: Theme.of(context).primaryColorLight,
+              ),
+            ),
+            Text(
+              "${translate('season')}: ${episode?.season ?? ''}",
+              style: GoogleFonts.marvel(
+                fontSize: 18,
+                color: Theme.of(context).primaryColorLight,
+              ),
+            ),
+          ],
+        )
+      ],
+    );
+  }
+}
+
 class _OverviewRow extends StatelessWidget {
   const _OverviewRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -165,7 +202,7 @@ class _OverviewRow extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         Text(
-          serie.plot,
+          episode?.plot ?? '',
           style: GoogleFonts.marvel(
             fontSize: 18,
             color: Theme.of(context).primaryColorLight,
@@ -179,9 +216,9 @@ class _OverviewRow extends StatelessWidget {
 class _ReleaseDateLanguageRow extends StatelessWidget {
   const _ReleaseDateLanguageRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -199,7 +236,7 @@ class _ReleaseDateLanguageRow extends StatelessWidget {
               ),
             ),
             Text(
-              serie.released,
+              episode?.released ?? '',
               style: GoogleFonts.marvel(
                 fontSize: 18,
                 color: Theme.of(context).primaryColorLight,
@@ -219,7 +256,7 @@ class _ReleaseDateLanguageRow extends StatelessWidget {
               ),
             ),
             Text(
-              serie.language,
+              episode?.language ?? '',
               style: GoogleFonts.marvel(
                 fontSize: 18,
                 color: Theme.of(context).primaryColorLight,
@@ -235,9 +272,9 @@ class _ReleaseDateLanguageRow extends StatelessWidget {
 class _RatingRow extends StatelessWidget {
   const _RatingRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -259,7 +296,7 @@ class _RatingRow extends StatelessWidget {
               color: Colors.amber,
             ),
             Text(
-              serie.ratings[0].value,
+              episode?.ratings[0].value ?? '',
               style: GoogleFonts.marvel(
                 fontSize: 18,
                 color: Theme.of(context).primaryColorLight,
@@ -275,9 +312,9 @@ class _RatingRow extends StatelessWidget {
 class _GenreRow extends StatelessWidget {
   const _GenreRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -292,7 +329,7 @@ class _GenreRow extends StatelessWidget {
           ),
         ),
         Text(
-          serie.genre,
+          episode?.genre ?? '',
           style: GoogleFonts.marvel(
             fontSize: 18,
             color: Theme.of(context).primaryColorLight,
@@ -306,9 +343,9 @@ class _GenreRow extends StatelessWidget {
 class _OriginCountryRow extends StatelessWidget {
   const _OriginCountryRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -323,7 +360,7 @@ class _OriginCountryRow extends StatelessWidget {
           ),
         ),
         Text(
-          serie.country,
+          episode?.country ?? '',
           style: GoogleFonts.marvel(
             fontSize: 18,
             color: Theme.of(context).primaryColorLight,
@@ -337,9 +374,9 @@ class _OriginCountryRow extends StatelessWidget {
 class _ActorsRow extends StatelessWidget {
   const _ActorsRow({
     Key? key,
-    required this.serie,
+    required this.episode,
   }) : super(key: key);
-  final SerieModel serie;
+  final EpisodeModel? episode;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -354,42 +391,11 @@ class _ActorsRow extends StatelessWidget {
           ),
         ),
         Text(
-          serie.actors,
+          episode?.actors ?? '',
           style: GoogleFonts.marvel(
             fontSize: 18,
             color: Theme.of(context).primaryColorLight,
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _SeasonsRow extends StatelessWidget {
-  const _SeasonsRow({
-    Key? key,
-    required this.serie,
-  }) : super(key: key);
-  final SerieModel serie;
-  @override
-  Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "${translate('seasons')}: ${serie.totalSeasons}",
-          style: GoogleFonts.marvel(
-            fontSize: 20,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).primaryColorLight,
-          ),
-        ),
-        SizedBox(
-          height: size.height * 0.01,
-        ),
-        CardSlider(
-          serie: serie,
         ),
       ],
     );

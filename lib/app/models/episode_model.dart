@@ -1,11 +1,13 @@
-import 'package:dacodes_test/app/models/serie_models/rating_model.dart';
+import 'package:dacodes_test/app/models/rating_model.dart';
 import 'package:equatable/equatable.dart';
 
-class SerieModel extends Equatable {
+class EpisodeModel extends Equatable {
   final String title;
   final String year;
   final String rated;
   final String released;
+  final String season;
+  final String episode;
   final String runtime;
   final String genre;
   final String director;
@@ -21,15 +23,17 @@ class SerieModel extends Equatable {
   final String imdbRating;
   final String imdbVotes;
   final String imdbID;
+  final String seriesID;
   final String type;
-  final String totalSeasons;
   final String response;
 
-  const SerieModel({
+  const EpisodeModel({
     required this.title,
     required this.year,
     required this.rated,
     required this.released,
+    required this.season,
+    required this.episode,
     required this.runtime,
     required this.genre,
     required this.director,
@@ -45,19 +49,20 @@ class SerieModel extends Equatable {
     required this.imdbRating,
     required this.imdbVotes,
     required this.imdbID,
+    required this.seriesID,
     required this.type,
-    required this.totalSeasons,
     required this.response,
   });
 
-  factory SerieModel.fromJson(Map<String, dynamic> json) {
+  factory EpisodeModel.fromJson(Map<String, dynamic> json) {
     final List<dynamic> jsonRatings = json['Ratings'];
-
-    return SerieModel(
+    return EpisodeModel(
       title: json['Title'] ?? '',
       year: json['Year'] ?? '',
       rated: json['Rated'] ?? '',
       released: json['Released'] ?? '',
+      season: json['Season'] ?? '',
+      episode: json['Episode'] ?? '',
       runtime: json['Runtime'] ?? '',
       genre: json['Genre'] ?? '',
       director: json['Director'] ?? '',
@@ -74,18 +79,20 @@ class SerieModel extends Equatable {
       imdbRating: json['imdbRating'] ?? '',
       imdbVotes: json['imdbVotes'] ?? '',
       imdbID: json['imdbID'] ?? '',
+      seriesID: json['seriesID'] ?? '',
       type: json['Type'] ?? '',
-      totalSeasons: json['totalSeasons'] ?? '',
       response: json['Response'] ?? '',
     );
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {
+    return {
       'Title': title,
       'Year': year,
       'Rated': rated,
       'Released': released,
+      'Season': season,
+      'Episode': episode,
       'Runtime': runtime,
       'Genre': genre,
       'Director': director,
@@ -101,12 +108,10 @@ class SerieModel extends Equatable {
       'imdbRating': imdbRating,
       'imdbVotes': imdbVotes,
       'imdbID': imdbID,
+      'seriesID': seriesID,
       'Type': type,
-      'totalSeasons': totalSeasons,
       'Response': response,
     };
-
-    return data;
   }
 
   @override
@@ -115,6 +120,8 @@ class SerieModel extends Equatable {
         year,
         rated,
         released,
+        season,
+        episode,
         runtime,
         genre,
         director,
@@ -130,8 +137,8 @@ class SerieModel extends Equatable {
         imdbRating,
         imdbVotes,
         imdbID,
+        seriesID,
         type,
-        totalSeasons,
         response,
       ];
 }

@@ -1,5 +1,5 @@
 import 'package:dacodes_test/app/_childrens/serie/pages/serie_detail_page.dart';
-import 'package:dacodes_test/app/models/serie_models/serie_model.dart';
+import 'package:dacodes_test/app/models/serie_model.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/helper.dart';
@@ -10,8 +10,14 @@ class CardSeries extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(children: [
-      Text("${serie.title} (${serie.year})"),
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      SizedBox(
+        width: size.width * .8,
+        child: Text(
+          "${serie.title} (${serie.year})",
+          style: TextStyle(color: Theme.of(context).primaryColorDark),
+        ),
+      ),
       Padding(
         padding: const EdgeInsets.all(8.0),
         child: GestureDetector(

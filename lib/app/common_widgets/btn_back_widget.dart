@@ -1,8 +1,7 @@
-import 'package:dacodes_test/app/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class BackBtn extends StatelessWidget {
-  const BackBtn({
+class ButtonBack extends StatelessWidget {
+  const ButtonBack({
     Key? key,
   }) : super(key: key);
   @override
@@ -12,7 +11,7 @@ class BackBtn extends StatelessWidget {
       width: 70,
       margin: const EdgeInsets.only(top: 16, left: 16),
       decoration: BoxDecoration(
-          color: ColorsMarvel.marvelSecondary,
+          color: Theme.of(context).primaryColor,
           borderRadius: BorderRadius.circular(8)),
       child: IconButton(
         onPressed: () {

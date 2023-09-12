@@ -1,4 +1,4 @@
-import 'package:dacodes_test/app/constants/colors.dart';
+import 'package:dacodes_test/app/common_widgets/dark_mode_button.dart';
 import 'package:flutter/material.dart';
 
 class AppBarDacodes extends StatelessWidget {
@@ -11,7 +11,7 @@ class AppBarDacodes extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppBar(
       leading: BackButton(
-          color: Colors.white,
+          color: Theme.of(context).primaryColorLight,
           onPressed: () {
             Navigator.pop(context);
           }),
@@ -24,7 +24,13 @@ class AppBarDacodes extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      backgroundColor: ColorsMarvel.marvelPrimary,
+      actions: const [
+        Padding(
+          padding: EdgeInsets.all(10),
+          child: DarkModeButton(),
+        )
+      ],
+      backgroundColor: Theme.of(context).primaryColor,
     );
   }
 }

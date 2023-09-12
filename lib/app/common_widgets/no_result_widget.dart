@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dacodes_test/app/common_widgets/btn_widget.dart';
 import 'package:dacodes_test/app/constants/assets.dart';
-import 'package:dacodes_test/app/constants/texts.dart';
+import 'package:flutter_translate/flutter_translate.dart';
 
 class NoResultWidget extends StatelessWidget {
   const NoResultWidget({
@@ -19,12 +19,13 @@ class NoResultWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.10,
+          height: size.height * 0.10,
         ),
         Image.asset(
           AssetsUIValues.noResults,
@@ -67,9 +68,9 @@ class NoResultWidget extends StatelessWidget {
               if (onTap != null)
                 Padding(
                   padding: const EdgeInsets.only(top: 40.0),
-                  child: ButttonCustom(
+                  child: ButtonCustom(
                     onTap: onTap,
-                    label: TextUIValues.reload,
+                    label: translate('reload'),
                     fontSize: 14,
                     height: 30,
                   ),

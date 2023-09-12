@@ -1,6 +1,6 @@
-import 'package:dacodes_test/app/models/serie_models/episode_model.dart';
-import 'package:dacodes_test/app/models/serie_models/season_model.dart';
-import 'package:dacodes_test/app/models/serie_models/serie_model.dart';
+import 'package:dacodes_test/app/models/episode_model.dart';
+import 'package:dacodes_test/app/models/season_model.dart';
+import 'package:dacodes_test/app/models/serie_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:dacodes_test/app/utils/helper.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';

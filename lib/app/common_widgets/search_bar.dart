@@ -1,3 +1,4 @@
+import 'package:dacodes_test/app/common_widgets/flag_language.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_translate/flutter_translate.dart';
 
@@ -5,24 +6,32 @@ class SearchBarWidget extends StatelessWidget {
   final TextEditingController controller;
 
   final VoidCallback onSearch;
+  final VoidCallback onClear;
 
   const SearchBarWidget({
     Key? key,
     required this.controller,
     required this.onSearch,
+    required this.onClear,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Container(
-      color: Colors.white.withOpacity(0.2),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.2),
+        borderRadius: BorderRadius.circular(16),
+      ),
       margin: EdgeInsets.symmetric(horizontal: size.width * .05),
-      padding: EdgeInsets.symmetric(horizontal: size.width * .05),
+      padding: EdgeInsets.only(left: size.width * .05),
       child: Row(
         children: [
           Expanded(
             child: TextField(
+              style: TextStyle(
+                color: Theme.of(context).primaryColorLight,
+              ),
               controller: controller,
               decoration: InputDecoration(
                 hintText: translate('search'),
@@ -34,12 +43,14 @@ class SearchBarWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            icon: const Icon(Icons.search),
+            icon: Icon(
+              Icons.search,
+              color: Theme.of(context).primaryColorDark,
+            ),
             onPressed: onSearch,
           ),
-          IconButton(
-            icon: const Icon(Icons.close),
-            onPressed: () => controller.clear(),
+          const FlagLanguage(
+            showButton: false,
           ),
         ],
       ),

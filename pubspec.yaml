@@ -42,6 +42,12 @@ dependencies:
   carousel_slider: ^4.2.1
   cupertino_icons: ^1.0.2
   animate_do: ^3.0.2
+  country_code_picker: ^3.0.0
+  shared_preferences: ^2.0.11
+  provider: ^6.0.1
+  bloc_test: ^9.1.1
+  responsive_framework: ^1.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

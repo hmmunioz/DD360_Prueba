@@ -1,7 +1,6 @@
 # DaCodes Test
 
-This is a test application for the company DaCodes, which consists of loading a list of apis that have Marvel information such as Superheroes, Comics, Events, Series and Stories
-
+This is a test application for the DaCodes company, which consists of showing a card with the information of a series, in addition to showing its seasons, chapters and details of each chapter. It also has a search engine to choose other series.
 ## How to Use
 
 **Step 1:**
@@ -13,11 +12,8 @@ git@github.com:hmmunioz/DaCodes_Prueba.git
 ```
 
 **Step 2:**
-Add the .env to the root of the project before to run (I send the .env file to the e-mail diana.rubio@dacodes.com)
+Make sure that the .env file is at the root of the project since it has the api key
 
--Fonly for ios:
-
-1.  Change iOS Deployment Target in FMDB to iOS 11.0
 
 Go to project root and execute the following command in console to get the required dependencies:
 
@@ -33,21 +29,32 @@ flutter run
 
 ## DaCodes Features:
 
-- Superhero
-- Comics
-- Event
-- Series
-- Stories
+- Serie
+- Season
+- Episode
+
 
 ### Libraries & Tools Used
 
-- [flutter version v2.10.5]
+- [fvm flutter version v3.0.0] Use this Flutter version to execute the project (use fvm for flutter versions managment)
+- [fvm](https://fvm.app/es/docs/guides/global_version/)
 - [equatable](https://pub.dev/packages/equatable)
 - [shimmer](https://pub.dev/packages/shimmer)
 - [flutter_bloc](https://pub.dev/packages/flutter_bloc)
 - [http](https://pub.dev/packages/http)
 - [cached_network_image](https://pub.dev/packages/cached_network_image)
 - [flutter_dotenv](https://pub.dev/packages/flutter_dotenv)
+- [flutter_translate](https://pub.dev/packages/flutter_translate)
+- [google_fonts](https://pub.dev/packages/google_fonts)'
+- [carousel_slider](https://pub.dev/packages/carousel_slider)
+- [cupertino_icons](https://pub.dev/packages/cupertino_icons)
+- [animate_do](https://pub.dev/packages/animate_do)
+- [country_code_picker](https://pub.dev/packages/country_code_picker)
+- [shared_preferences](https://pub.dev/packages/shared_preferences)
+- [provider](https://pub.dev/packages/provider)
+- [bloc_test](https://pub.dev/packages/bloc_test)
+- [responsive_framework](https://pub.dev/packages/responsive_framework)
+
 
 ### Folder Structure
 
@@ -68,21 +75,19 @@ Here is the folder structure we have been using in this project
 lib/
 |- app/
   |- _childrens/
-     |- superheros/
+     |- serie/
        |- bloc
-       |- enums
+       |- pages
        |- widgets
   |- common_widgets/
   |- constants/
-  |- enums/
   |- models/
+  |- repository/
   |- router/
+  |- theme/
   |- utils/
 |- main.dart
 |- .env
 ```
 
-![alt text](https://i.postimg.cc/G4YQdLJq/Captura-de-pantalla-2023-05-15-a-la-s-02-14-48.png)
 
-![alt text](https://i.postimg.cc/gwWK0Cgd/Captura-de-pantalla-2023-05-15-a-la-s-02-15-11.png)
-![alt text](https://i.postimg.cc/bsZgVHGX/Captura-de-pantalla-2023-05-15-a-la-s-02-15-21.png)

@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart' as bloc;
-import 'package:dacodes_test/app/models/serie_models/episode_model.dart';
-import 'package:dacodes_test/app/models/serie_models/season_model.dart';
-import 'package:dacodes_test/app/models/serie_models/serie_model.dart';
+import 'package:dacodes_test/app/models/episode_model.dart';
+import 'package:dacodes_test/app/models/season_model.dart';
+import 'package:dacodes_test/app/models/serie_model.dart';
 import 'package:dacodes_test/app/repository/repository.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +39,11 @@ class Bloc extends bloc.Bloc<Event, State> {
     }
   }
 
-  Future<Model> _getSeason() async {
-    final seasonResponse = await repository.getSeasonApi(search: '', season: 1);
+  Future<Model> _getSeason({String search = '', int season = 1}) async {
+    final seasonResponse = await repository.getSeasonApi(
+      search: search,
+      season: season,
+    );
     return state.model.copyWith(
       season: seasonResponse,
     );
@@ -52,18 +55,22 @@ class Bloc extends bloc.Bloc<Event, State> {
   ) async {
     emit(LoadingSeasonState(state.model));
     try {
-      final model = await _getSeason();
+      final model = await _getSeason(
+        search: event.search,
+        season: event.season,
+      );
       emit(LoadedSeasonState(model));
     } catch (error) {
       emit(ErrorState(state.model));
     }
   }
 
-  Future<Model> _getEpisode() async {
+  Future<Model> _getEpisode(
+      {String search = '', int season = 1, int episode = 1}) async {
     final episodeResponse = await repository.getEpisodeApi(
-      search: '',
-      season: 1,
-      episode: 1,
+      search: search,
+      season: season,
+      episode: episode,
     );
     return state.model.copyWith(
       episode: episodeResponse,
@@ -76,7 +83,11 @@ class Bloc extends bloc.Bloc<Event, State> {
   ) async {
     emit(LoadingEpisodeState(state.model));
     try {
-      final model = await _getEpisode();
+      final model = await _getEpisode(
+        search: event.search,
+        season: event.season,
+        episode: event.episode,
+      );
       emit(LoadedEpisodeState(model));
     } catch (error) {
       emit(ErrorState(state.model));
